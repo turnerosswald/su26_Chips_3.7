@@ -45,10 +45,10 @@ class WordGuesserApp < Sinatra::Base
       guess_is_valid = @game.guess(current_guess)
       
       if !guess_is_valid
-        flash[:message] = "You already used that letter! :/"
+        flash[:message] = "You already used that letter"
       end
     rescue ArgumentError
-      flash[:message] = "That is not a letter >:("
+      flash[:message] = "Invalid Guess"
     end
       
 
