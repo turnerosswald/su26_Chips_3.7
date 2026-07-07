@@ -45,10 +45,10 @@ class WordGuesserApp < Sinatra::Base
       guess_is_valid = @game.guess(current_guess)
       
       if !guess_is_valid
-        flash[:message] = "You already used that letter."
+        flash[:message] = "You have already used that letter."
       end
     rescue ArgumentError
-      flash[:message] = "Invalid Guess."
+      flash[:message] = "Invalid guess."
     end
       
 
@@ -77,12 +77,20 @@ class WordGuesserApp < Sinatra::Base
 
   get '/win' do
     ### YOUR CODE HERE ###
-    erb :win
+    if @game.check_win_or_lose == :win
+      erb :win
+    else
+      redirect '/show'
+    end
 
   end
 
   get '/lose' do
     ### YOUR CODE HERE ###
-    erb :lose
+    if @game.check_win_or_lose == :lose
+      erb :lose
+    else
+      redirect '/show'
+    end
   end
 end
